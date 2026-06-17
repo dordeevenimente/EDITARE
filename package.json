@@ -1,0 +1,53 @@
+{
+  "name": "ffmpeg-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for AI-agent-driven video editing, powered by FFmpeg.",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ffmpeg",
+    "video-editing",
+    "ai-agent",
+    "claude",
+    "transcription",
+    "whisper"
+  ],
+  "license": "MIT",
+  "author": "Sohn EuiJin",
+  "homepage": "https://github.com/none-stack-developer/ffmpeg-mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/none-stack-developer/ffmpeg-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/none-stack-developer/ffmpeg-mcp/issues"
+  },
+  "type": "module",
+  "bin": {
+    "ffmpeg-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "inspect": "npx @modelcontextprotocol/inspector node dist/index.js",
+    "download-model": "node scripts/download-model.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.8"
+  }
+}

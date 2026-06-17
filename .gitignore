@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Whisper models (large binaries — download separately, see README)
+models/
+*.bin
+
+# Temp / test artifacts
+.tmp/
+*.log
+
+# Editor / OS
+.DS_Store
+.vscode/
+.idea/
