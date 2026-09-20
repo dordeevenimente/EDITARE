@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<title>DOR — Table Experience</title>
+<style>
+  @font-face{font-family:ID;src:url(fonts/InterDisplay-ExtraLight.ttf);font-weight:200}
+  @font-face{font-family:ID;src:url(fonts/InterDisplay-Light.ttf);font-weight:300}
+  @font-face{font-family:ID;src:url(fonts/InterDisplay-Regular.ttf);font-weight:400}
+  @font-face{font-family:ID;src:url(fonts/InterDisplay-Medium.ttf);font-weight:500}
+  @font-face{font-family:ID;src:url(fonts/InterDisplay-SemiBold.ttf);font-weight:600}
+  @font-face{font-family:ID;src:url(fonts/InterDisplay-Bold.ttf);font-weight:700}
+  @font-face{font-family:ID;src:url(fonts/InterDisplay-ExtraBold.ttf);font-weight:800}
+  @font-face{font-family:ID;src:url(fonts/InterDisplay-Black.ttf);font-weight:900}
+
+  :root{
+    --cream:#F4EADC;
+    --cream-dim:rgba(244,234,220,.62);
+    --cream-faint:rgba(244,234,220,.44);
+    --line:rgba(244,234,220,.20);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1080px;height:1440px}
+  body{
+    font-family:ID,sans-serif;
+    background:#160F0A;
+    color:var(--cream);
+    -webkit-font-smoothing:antialiased;
+    overflow:hidden;
+  }
+  .canvas{position:relative;width:1080px;height:1440px;overflow:hidden}
+  .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .scrim{position:absolute;inset:0;
+    background:
+      linear-gradient(180deg,rgba(12,8,5,.42) 0%,rgba(12,8,5,.00) 24%,rgba(12,8,5,.30) 56%,rgba(9,6,4,.82) 100%);
+  }
+  .frame{position:absolute;inset:44px;border:1px solid rgba(244,234,220,.18)}
+
+  .inner{position:absolute;inset:0;padding:92px 100px 86px;display:flex;flex-direction:column;align-items:center}
+
+  /* ---------- venue lockup ---------- */
+  .venue{font-weight:600;font-size:46px;letter-spacing:.30em;text-indent:.30em;line-height:1}
+  .venue-sub{margin-top:14px;font-weight:300;font-size:21px;letter-spacing:.52em;text-indent:.52em;color:var(--cream-dim)}
+
+  /* ---------- kicker ---------- */
+  .kicker{margin-top:44px;display:flex;align-items:center;gap:22px;width:100%}
+  .kicker .rule{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
+  .kicker span{font-weight:500;font-size:19px;letter-spacing:.30em;text-indent:.30em;color:var(--cream-dim);white-space:nowrap}
+
+  /* ---------- headline ---------- */
+  .head{margin-top:34px;text-align:center}
+  .head .l1{font-weight:800;font-size:116px;letter-spacing:-.055em;line-height:.86}
+  .head .l2{font-weight:800;font-size:116px;letter-spacing:-.055em;line-height:.86}
+  .head .l2 em{font-style:normal;font-weight:200;letter-spacing:-.02em}
+  .head-sub{margin-top:24px;font-weight:400;font-size:22px;letter-spacing:.20em;text-indent:.20em;color:var(--cream-dim)}
+
+  /* ---------- cards ---------- */
+  .cards{margin-top:56px;width:100%;display:flex;flex-direction:column;gap:28px}
+  .card{
+    position:relative;
+    border:1px solid var(--line);
+    box-shadow:inset 0 1px 0 rgba(244,234,220,.07);
+    background:linear-gradient(180deg,rgba(38,24,15,.50),rgba(16,10,6,.62));
+    padding:38px 40px 34px;
+  }
+  .card.hot{border-color:rgba(244,234,220,.34);background:linear-gradient(180deg,rgba(58,36,21,.58),rgba(20,12,7,.66))}
+  .tag{
+    position:absolute;top:-11px;right:34px;
+    font-weight:700;font-size:14px;letter-spacing:.20em;text-indent:.20em;
+    background:var(--cream);color:#1A100A;padding:5px 14px 4px;
+  }
+  .row{display:flex;align-items:baseline;justify-content:space-between}
+  .name{font-weight:700;font-size:52px;letter-spacing:-.025em;line-height:1}
+  .price{font-weight:800;font-size:56px;letter-spacing:-.035em;line-height:1}
+  .specs{margin-top:18px;font-weight:400;font-size:21px;letter-spacing:.055em;color:var(--cream-dim)}
+  .bar{margin-top:22px;display:flex;align-items:center;gap:18px}
+  .track{flex:1;height:4px;background:rgba(244,234,220,.14);position:relative}
+  .fill{position:absolute;left:0;top:0;bottom:0;background:var(--cream)}
+  .pct{font-weight:600;font-size:16px;letter-spacing:.17em;text-indent:.17em;white-space:nowrap}
+  .card:not(.hot) .pct{color:var(--cream-dim)}
+  .card:not(.hot) .fill{background:rgba(244,234,220,.72)}
+
+  .note{margin-top:30px;font-weight:400;font-size:18px;letter-spacing:.14em;text-indent:.14em;color:var(--cream-faint);text-align:center;width:100%}
+
+  /* ---------- footer ---------- */
+  .foot{margin-top:auto;width:100%;text-align:center}
+  .foot .when{font-weight:600;font-size:26px;letter-spacing:.12em;text-indent:.12em}
+  .foot .where{margin-top:12px;font-weight:300;font-size:19px;letter-spacing:.12em;text-indent:.12em;color:var(--cream-dim)}
+  .foot .res{margin-top:22px;font-weight:600;font-size:23px;letter-spacing:.10em;text-indent:.10em}
+  .foot .res b{font-weight:800;letter-spacing:.02em}
+  .logos{margin-top:34px;display:flex;align-items:center;justify-content:center;gap:34px}
+  .logos img.dor{height:46px}
+  .logos img.hc{height:56px;opacity:.92}
+  .logos .sep{width:1px;height:38px;background:var(--line)}
+</style>
+</head>
+<body>
+<div class="canvas">
+  <img class="bg" src="assets/bg.png">
+  <div class="scrim"></div>
+  <div class="frame"></div>
+
+  <div class="inner">
+    <div class="venue">BRIBÓN</div>
+    <div class="venue-sub">del puerto</div>
+
+    <div class="kicker">
+      <div class="rule"></div>
+      <span>BOGDAN DLP · LIVE CU FORMAȚIA</span>
+      <div class="rule"></div>
+    </div>
+
+    <div class="head">
+      <div class="l1">TABLE</div>
+      <div class="l2">EXPERIENCE</div>
+      <div class="head-sub">MESE REZERVATE · BILETE INCLUSE · SERVICIU LA MASĂ</div>
+    </div>
+
+    <div class="cards">
+      <div class="card hot">
+        <div class="tag">ULTIMELE MESE</div>
+        <div class="row"><div class="name">SOFA TABLE</div><div class="price">500€</div></div>
+        <div class="specs">MAX. 6 PERSOANE · 2 STICLE · 6 BILETE INCLUSE</div>
+        <div class="bar">
+          <div class="track"><div class="fill" style="width:80%"></div></div>
+          <div class="pct">80% SOLD OUT</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="row"><div class="name">STANDING TABLE</div><div class="price">250€</div></div>
+        <div class="specs">MAX. 4 PERSOANE · 1 STICLĂ · 4 BILETE INCLUSE</div>
+        <div class="bar">
+          <div class="track"><div class="fill" style="width:60%"></div></div>
+          <div class="pct">60% SOLD OUT</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">REZERVĂRI ONLINE — LINK ÎN BIO · LOCURI LIMITATE</div>
+
+    <div class="foot">
+      <div class="when">VIE 09 OCTUBRE · DESDE LAS 23:00H</div>
+      <div class="where">PENÍNSULA DE CONTRADIQUE, 04720 · AGUADULCE (ALMERÍA)</div>
+      <div class="res">INFO &amp; REZERVĂRI <b>679 743 114</b></div>
+      <div class="logos">
+        <img class="dor" src="assets/dor.png">
+        <div class="sep"></div>
+        <img class="hc" src="assets/havana.png">
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
