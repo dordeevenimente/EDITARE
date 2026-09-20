@@ -2,7 +2,7 @@
 <html lang="ro">
 <head>
 <meta charset="utf-8">
-<title>DOR — Table Experience Story</title>
+<title>DOR — Rezervă-ți masa (story)</title>
 <style>
   @font-face{font-family:ID;src:url(fonts/InterDisplay-ExtraLight.ttf);font-weight:200}
   @font-face{font-family:ID;src:url(fonts/InterDisplay-Light.ttf);font-weight:300}
@@ -17,6 +17,9 @@
     --cream-dim:rgba(244,234,220,.62);
     --cream-faint:rgba(244,234,220,.44);
     --line:rgba(244,234,220,.20);
+    --heat:linear-gradient(90deg,#E9C65C 0%,#E4A33F 34%,#DC6F30 67%,#D13B2B 100%);
+    --hot:#EE7A45;
+    --warm:#EBAE4E;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html,body{width:1080px;height:1920px}
@@ -42,18 +45,22 @@
   .cards{margin-top:58px;width:100%;display:flex;flex-direction:column;gap:32px}
   .card{position:relative;border:1px solid var(--line);box-shadow:inset 0 1px 0 rgba(244,234,220,.07);
     background:linear-gradient(180deg,rgba(38,24,15,.50),rgba(16,10,6,.62));padding:38px 42px 34px}
-  .card.hot{border-color:rgba(244,234,220,.34);background:linear-gradient(180deg,rgba(58,36,21,.58),rgba(20,12,7,.66))}
-  .tag{position:absolute;top:-12px;right:36px;font-weight:700;font-size:15px;letter-spacing:.20em;text-indent:.20em;background:var(--cream);color:#1A100A;padding:6px 15px 5px}
-  .row{display:flex;align-items:baseline;justify-content:space-between}
-  .name{font-weight:700;font-size:54px;letter-spacing:-.025em;line-height:1}
+  .card.hot{border-color:rgba(221,91,46,.55);background:linear-gradient(180deg,rgba(66,34,18,.60),rgba(20,12,7,.66))}
+  .tag{position:absolute;top:-12px;right:36px;font-weight:700;font-size:15px;letter-spacing:.20em;text-indent:.20em;
+    background:linear-gradient(90deg,#DC6F30,#D13B2B);color:#FFF3E6;padding:6px 16px 5px;box-shadow:0 4px 18px rgba(209,59,43,.42)}
+  .row{display:flex;align-items:baseline;justify-content:space-between;gap:24px}
+  .name{font-weight:700;font-size:50px;letter-spacing:-.025em;line-height:1;white-space:nowrap}
   .price{font-weight:800;font-size:58px;letter-spacing:-.035em;line-height:1}
   .specs{margin-top:20px;font-weight:400;font-size:22px;letter-spacing:.055em;color:var(--cream-dim)}
-  .bar{margin-top:26px;display:flex;align-items:center;gap:18px}
-  .track{flex:1;height:4px;background:rgba(244,234,220,.14);position:relative}
-  .fill{position:absolute;left:0;top:0;bottom:0;background:var(--cream)}
-  .pct{font-weight:600;font-size:17px;letter-spacing:.17em;text-indent:.17em;white-space:nowrap}
-  .card:not(.hot) .pct{color:var(--cream-dim)}
-  .card:not(.hot) .fill{background:rgba(244,234,220,.72)}
+
+  .bar{margin-top:26px;display:flex;align-items:center;gap:20px}
+  .track{flex:1;height:8px;background:rgba(244,234,220,.11);position:relative;overflow:hidden}
+  .fill{position:absolute;left:0;top:0;bottom:0;overflow:hidden}
+  .fill i{position:absolute;left:0;top:0;bottom:0;background:var(--heat);display:block}
+  .pct{font-weight:700;font-size:18px;letter-spacing:.16em;text-indent:.16em;white-space:nowrap}
+  .card.hot .fill{box-shadow:0 0 22px rgba(220,111,48,.45)}
+  .card.hot .pct{color:var(--hot)}
+  .card:not(.hot) .pct{color:var(--warm)}
 
   .note{margin-top:40px;font-weight:400;font-size:19px;letter-spacing:.14em;text-indent:.14em;color:var(--cream-faint);text-align:center;width:100%}
 
@@ -85,31 +92,37 @@
     </div>
 
     <div class="head">
-      <div class="l">TABLE</div>
-      <div class="l">EXPERIENCE</div>
-      <div class="head-sub">MESE REZERVATE · BILETE INCLUSE · SERVICIU LA MASĂ</div>
+      <div class="l">REZERVĂ-ȚI</div>
+      <div class="l">MASA</div>
+      <div class="head-sub">MESE ȘI ZONE VIP · BILETE INCLUSE · SERVICIU LA MASĂ</div>
     </div>
 
     <div class="cards">
       <div class="card hot">
         <div class="tag">ULTIMELE MESE</div>
-        <div class="row"><div class="name">SOFA TABLE</div><div class="price">500€</div></div>
+        <div class="row"><div class="name">MASĂ CU CANAPEA</div><div class="price">500€</div></div>
         <div class="specs">MAX. 6 PERSOANE · 2 STICLE · 6 BILETE INCLUSE</div>
-        <div class="bar"><div class="track"><div class="fill" style="width:80%"></div></div><div class="pct">80% SOLD OUT</div></div>
+        <div class="bar">
+          <div class="track"><div class="fill" style="width:80%"><i style="width:125%"></i></div></div>
+          <div class="pct">80% REZERVAT</div>
+        </div>
       </div>
       <div class="card">
-        <div class="row"><div class="name">STANDING TABLE</div><div class="price">250€</div></div>
+        <div class="row"><div class="name">MASĂ ÎN PICIOARE</div><div class="price">250€</div></div>
         <div class="specs">MAX. 4 PERSOANE · 1 STICLĂ · 4 BILETE INCLUSE</div>
-        <div class="bar"><div class="track"><div class="fill" style="width:60%"></div></div><div class="pct">60% SOLD OUT</div></div>
+        <div class="bar">
+          <div class="track"><div class="fill" style="width:60%"><i style="width:166.667%"></i></div></div>
+          <div class="pct">60% REZERVAT</div>
+        </div>
       </div>
     </div>
 
     <div class="note">REZERVĂRI ONLINE — LINK ÎN BIO · LOCURI LIMITATE</div>
 
     <div class="foot">
-      <div class="when">VIE 09 OCTUBRE · DESDE LAS 23:00H</div>
+      <div class="when">VINERI 9 OCTOMBRIE · DE LA ORA 23:00</div>
       <div class="where">PENÍNSULA DE CONTRADIQUE, 04720 · AGUADULCE (ALMERÍA)</div>
-      <div class="res">INFO &amp; REZERVĂRI <b>679 743 114</b></div>
+      <div class="res">INFO ȘI REZERVĂRI <b>679 743 114</b></div>
       <div class="logos">
         <img class="dor" src="assets/dor.png">
         <div class="sep"></div>

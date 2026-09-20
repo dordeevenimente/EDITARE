@@ -1,4 +1,4 @@
-# DOR — Table Experience (grafică mese)
+# DOR — Rezervă-ți masa (grafică mese)
 
 Grafică secundară pentru mese, derivată din afișul principal
 **Bogdan DLP · live cu formația — Bribón del Puerto, 9 octombrie 2026**.
@@ -32,11 +32,26 @@ micșoreaz-o la dimensiunea nominală (Lanczos) înainte de publicare.
 - Titraj Inter Display ExtraBold, tracking `-0.055em` (litere strânse, ca „Bogdan DLP").
 - Etichete și date: majuscule, tracking larg (`0.12em`–`0.30em`).
 - Chenar subțire interior, cu 44px margine — ramă discretă comună celor două formate.
-- Cardurile de masă: hairline crem 20% opacitate; cardul SOFA e evidențiat
-  (bordură mai puternică + etichetă „ULTIMELE MESE").
-- Barele de disponibilitate reflectă 80% / 60% sold out.
+- Cardurile de masă: hairline crem 20% opacitate; cardul cu canapea e evidențiat
+  (bordură portocalie + etichetă „ULTIMELE MESE").
+- Banda de ocupare folosește o scară de căldură comună celor două carduri:
+  auriu `#E9C65C` → chihlimbar `#E4A33F` → portocaliu `#DC6F30` → roșu `#D13B2B`,
+  întinsă pe lățimea totală a pistei. Umplerea decupează gradientul la procentul
+  real, deci 80% ajunge în roșu iar 60% se oprește în portocaliu — culoarea
+  comunică urgența fără să mai fie nevoie de citit procentul.
+- Tot textul este în limba română; rămân în original doar numele proprii
+  (Bribón del Puerto, Bogdan DLP, adresa din Aguadulce, DOR, Havana Club).
 
 ## De actualizat când se schimbă stocul
 
-În ambele HTML-uri: `style="width:80%"` / `style="width:60%"` pe `.fill`,
-textul din `.pct` și eticheta `.tag`.
+În ambele HTML-uri, pentru fiecare card:
+
+```html
+<div class="fill" style="width:80%"><i style="width:125%"></i></div>
+```
+
+- `.fill` → procentul ocupat (`width:80%`).
+- `<i>` → inversul aceluiași procent, ca gradientul să rămână aliniat între
+  carduri: `width: 100/procent * 100%` (80% → `125%`, 60% → `166.667%`,
+  50% → `200%`, 100% → `100%`).
+- Textul din `.pct` și, dacă e cazul, eticheta `.tag`.
