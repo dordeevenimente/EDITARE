@@ -1,4 +1,4 @@
-# DOR — Rezervă-ți masa (grafică mese)
+# DOR — Table Experience (grafică mese)
 
 Grafică secundară pentru mese, derivată din afișul principal
 **Bogdan DLP · live cu formația — Bribón del Puerto, 9 octombrie 2026**.
@@ -9,7 +9,8 @@ Grafică secundară pentru mese, derivată din afișul principal
 |---|---|
 | `mese.html` | Sursa graficii de feed — 1080×1440 (3:4, același raport ca afișul). |
 | `mese_story.html` | Sursa graficii de story — 1080×1920, cu zone sigure de 210px sus/jos. |
-| `assets/bg.png`, `assets/bg_story.png` | Fundal sepia derivat din afiș (crop din bokeh-ul din dreapta, blur + gradient cald + grain). |
+| `assets/bg.png`, `assets/bg_story.png` | Fundalul din afiș: fâșia curată a fotografiei (y 170–770, deasupra textului imprimat), scalată, cu marginile prelungite până la 1080px și stinsă treptat spre negru cald. Se regenerează cu `make_bg.py`. |
+| `make_bg.py` | Scriptul care construiește cele două fundaluri din afișul original. |
 | `assets/dor.png`, `assets/havana.png` | Logo-uri extrase pe transparență (luminanță → alpha, fill crem `#F4EADC`). |
 | `fonts/` | Inter Display (OFL) — grotesc apropiat de titrajul afișului. |
 | `export/` | PNG + JPG gata de postat. |
@@ -32,14 +33,17 @@ micșoreaz-o la dimensiunea nominală (Lanczos) înainte de publicare.
 - Titraj Inter Display ExtraBold, tracking `-0.055em` (litere strânse, ca „Bogdan DLP").
 - Etichete și date: majuscule, tracking larg (`0.12em`–`0.30em`).
 - Chenar subțire interior, cu 44px margine — ramă discretă comună celor două formate.
-- Cardurile de masă: hairline crem 20% opacitate; cardul cu canapea e evidențiat
+- Logo-ul DOR stă sus, în locul lockup-ului de pe afiș; Bribón del Puerto coboară
+  în subsol, alături de Havana Club.
+- Cardurile de masă: hairline crem 20% opacitate; cardul SOFA TABLE e evidențiat
   (bordură portocalie + etichetă „ULTIMELE MESE").
 - Banda de ocupare folosește o scară de căldură comună celor două carduri:
   auriu `#E9C65C` → chihlimbar `#E4A33F` → portocaliu `#DC6F30` → roșu `#D13B2B`,
   întinsă pe lățimea totală a pistei. Umplerea decupează gradientul la procentul
   real, deci 80% ajunge în roșu iar 60% se oprește în portocaliu — culoarea
   comunică urgența fără să mai fie nevoie de citit procentul.
-- Tot textul este în limba română; rămân în original doar numele proprii
+- Textul este în română, cu excepția denumirilor consacrate ale produsului
+  („TABLE EXPERIENCE", „SOFA TABLE", „STANDING TABLE") și a numelor proprii
   (Bribón del Puerto, Bogdan DLP, adresa din Aguadulce, DOR, Havana Club).
 
 ## De actualizat când se schimbă stocul

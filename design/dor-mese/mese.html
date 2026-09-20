@@ -2,7 +2,7 @@
 <html lang="ro">
 <head>
 <meta charset="utf-8">
-<title>DOR — Rezervă-ți masa</title>
+<title>DOR — Table Experience</title>
 <style>
   @font-face{font-family:ID;src:url(fonts/InterDisplay-ExtraLight.ttf);font-weight:200}
   @font-face{font-family:ID;src:url(fonts/InterDisplay-Light.ttf);font-weight:300}
@@ -15,8 +15,8 @@
 
   :root{
     --cream:#F4EADC;
-    --cream-dim:rgba(244,234,220,.62);
-    --cream-faint:rgba(244,234,220,.44);
+    --cream-dim:rgba(244,234,220,.64);
+    --cream-faint:rgba(244,234,220,.46);
     --line:rgba(244,234,220,.20);
     /* scara de ocupare: auriu -> chihlimbar -> portocaliu -> roșu */
     --heat:linear-gradient(90deg,#E9C65C 0%,#E4A33F 34%,#DC6F30 67%,#D13B2B 100%);
@@ -25,79 +25,76 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html,body{width:1080px;height:1440px}
-  body{
-    font-family:ID,sans-serif;
-    background:#160F0A;
-    color:var(--cream);
-    -webkit-font-smoothing:antialiased;
-    overflow:hidden;
-  }
+  body{font-family:ID,sans-serif;background:#160F0A;color:var(--cream);-webkit-font-smoothing:antialiased;overflow:hidden}
   .canvas{position:relative;width:1080px;height:1440px;overflow:hidden}
   .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  .scrim{position:absolute;inset:0;
-    background:linear-gradient(180deg,rgba(12,8,5,.42) 0%,rgba(12,8,5,.00) 24%,rgba(12,8,5,.30) 56%,rgba(9,6,4,.82) 100%);
-  }
-  .frame{position:absolute;inset:44px;border:1px solid rgba(244,234,220,.18)}
+  .scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,6,4,.30) 0%,rgba(10,6,4,0) 14%,rgba(10,6,4,0) 34%,rgba(9,6,4,.42) 52%,rgba(9,6,4,.80) 72%,rgba(9,6,4,.90) 100%)}
+  .frame{position:absolute;inset:44px;border:1px solid rgba(244,234,220,.16)}
 
-  .inner{position:absolute;inset:0;padding:92px 100px 86px;display:flex;flex-direction:column;align-items:center}
+  .inner{position:absolute;inset:0;padding:64px 100px 70px;display:flex;flex-direction:column;align-items:center}
 
-  /* ---------- lockup locație ---------- */
-  .venue{font-weight:600;font-size:46px;letter-spacing:.30em;text-indent:.30em;line-height:1}
-  .venue-sub{margin-top:14px;font-weight:300;font-size:21px;letter-spacing:.52em;text-indent:.52em;color:var(--cream-dim)}
+  /* ---------- logo DOR, sus ---------- */
+  .brand{height:92px}
+  .brand img{height:100%;display:block;filter:drop-shadow(0 6px 26px rgba(0,0,0,.55))}
+
+  /* spațiul în care se vede artistul, ca pe afiș */
+  .portrait{height:290px;flex:none}
 
   /* ---------- kicker ---------- */
-  .kicker{margin-top:44px;display:flex;align-items:center;gap:22px;width:100%}
+  .kicker{display:flex;align-items:center;gap:22px;width:100%}
   .kicker .rule{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
   .kicker span{font-weight:500;font-size:19px;letter-spacing:.30em;text-indent:.30em;color:var(--cream-dim);white-space:nowrap}
 
   /* ---------- titlu ---------- */
-  .head{margin-top:34px;text-align:center}
-  .head .l{font-weight:800;font-size:116px;letter-spacing:-.055em;line-height:.86}
-  .head-sub{margin-top:24px;font-weight:400;font-size:22px;letter-spacing:.20em;text-indent:.20em;color:var(--cream-dim)}
+  .head{margin-top:26px;text-align:center}
+  .head .l{font-weight:800;font-size:98px;letter-spacing:-.055em;line-height:.86}
 
   /* ---------- carduri ---------- */
-  .cards{margin-top:56px;width:100%;display:flex;flex-direction:column;gap:28px}
+  .cards{margin-top:42px;width:100%;display:flex;flex-direction:column;gap:20px}
   .card{
     position:relative;
     border:1px solid var(--line);
     box-shadow:inset 0 1px 0 rgba(244,234,220,.07);
-    background:linear-gradient(180deg,rgba(38,24,15,.50),rgba(16,10,6,.62));
-    padding:38px 40px 34px;
+    background:linear-gradient(180deg,rgba(38,24,15,.52),rgba(16,10,6,.66));
+    padding:28px 36px 26px;
   }
-  .card.hot{border-color:rgba(221,91,46,.55);background:linear-gradient(180deg,rgba(66,34,18,.60),rgba(20,12,7,.66))}
+  .card.hot{border-color:rgba(221,91,46,.55);background:linear-gradient(180deg,rgba(66,34,18,.62),rgba(20,12,7,.70))}
   .tag{
-    position:absolute;top:-12px;right:34px;
-    font-weight:700;font-size:14px;letter-spacing:.20em;text-indent:.20em;
-    background:linear-gradient(90deg,#DC6F30,#D13B2B);color:#FFF3E6;padding:6px 15px 5px;
+    position:absolute;top:-11px;right:32px;
+    font-weight:700;font-size:13px;letter-spacing:.20em;text-indent:.20em;
+    background:linear-gradient(90deg,#DC6F30,#D13B2B);color:#FFF3E6;padding:5px 14px 4px;
     box-shadow:0 4px 18px rgba(209,59,43,.42);
   }
   .row{display:flex;align-items:baseline;justify-content:space-between;gap:24px}
-  .name{font-weight:700;font-size:48px;letter-spacing:-.025em;line-height:1;white-space:nowrap}
-  .price{font-weight:800;font-size:56px;letter-spacing:-.035em;line-height:1}
-  .specs{margin-top:18px;font-weight:400;font-size:21px;letter-spacing:.055em;color:var(--cream-dim)}
+  .name{font-weight:700;font-size:44px;letter-spacing:-.025em;line-height:1;white-space:nowrap}
+  .price{font-weight:800;font-size:50px;letter-spacing:-.035em;line-height:1}
+  .specs{margin-top:15px;font-weight:400;font-size:20px;letter-spacing:.05em;color:var(--cream-dim)}
 
   /* ---------- banda de ocupare ---------- */
-  .bar{margin-top:24px;display:flex;align-items:center;gap:20px}
+  .bar{margin-top:19px;display:flex;align-items:center;gap:20px}
   .track{flex:1;height:8px;background:rgba(244,234,220,.11);position:relative;overflow:hidden}
   .fill{position:absolute;left:0;top:0;bottom:0;overflow:hidden}
   .fill i{position:absolute;left:0;top:0;bottom:0;background:var(--heat);display:block}
-  .pct{font-weight:700;font-size:17px;letter-spacing:.16em;text-indent:.16em;white-space:nowrap}
+  .pct{font-weight:700;font-size:16px;letter-spacing:.16em;text-indent:.16em;white-space:nowrap}
   .card.hot .fill{box-shadow:0 0 22px rgba(220,111,48,.45)}
   .card.hot .pct{color:var(--hot)}
   .card:not(.hot) .pct{color:var(--warm)}
 
-  .note{margin-top:30px;font-weight:400;font-size:18px;letter-spacing:.14em;text-indent:.14em;color:var(--cream-faint);text-align:center;width:100%}
+  /* ---------- informații ---------- */
+  .info{margin-top:auto;padding-top:20px;width:100%;text-align:center}
+  .info .when{font-weight:600;font-size:25px;letter-spacing:.12em;text-indent:.12em}
+  .info .where{margin-top:11px;font-weight:300;font-size:18px;letter-spacing:.12em;text-indent:.12em;color:var(--cream-dim)}
+  .info .res{margin-top:18px;font-weight:600;font-size:22px;letter-spacing:.10em;text-indent:.10em}
+  .info .res b{font-weight:800;letter-spacing:.02em}
+  .info .online{margin-top:12px;font-weight:400;font-size:17px;letter-spacing:.14em;text-indent:.14em;color:var(--cream-faint)}
 
-  /* ---------- subsol ---------- */
-  .foot{margin-top:auto;width:100%;text-align:center}
-  .foot .when{font-weight:600;font-size:26px;letter-spacing:.12em;text-indent:.12em}
-  .foot .where{margin-top:12px;font-weight:300;font-size:19px;letter-spacing:.12em;text-indent:.12em;color:var(--cream-dim)}
-  .foot .res{margin-top:22px;font-weight:600;font-size:23px;letter-spacing:.10em;text-indent:.10em}
-  .foot .res b{font-weight:800;letter-spacing:.02em}
-  .logos{margin-top:34px;display:flex;align-items:center;justify-content:center;gap:34px}
-  .logos img.dor{height:46px}
-  .logos img.hc{height:56px;opacity:.92}
-  .logos .sep{width:1px;height:38px;background:var(--line)}
+  /* ---------- lockup jos: Bribón + Havana Club ---------- */
+  .bottom{margin-top:26px;display:flex;align-items:center;justify-content:center;gap:32px}
+  .bribon{text-align:center}
+  .bribon .n{font-weight:600;font-size:30px;letter-spacing:.28em;text-indent:.28em;line-height:1}
+  .bribon .s{margin-top:8px;font-weight:300;font-size:14px;letter-spacing:.46em;text-indent:.46em;color:var(--cream-dim)}
+  .bottom .sep{width:1px;height:46px;background:var(--line)}
+  .bottom img.hc{height:56px;opacity:.92}
 </style>
 </head>
 <body>
@@ -107,8 +104,9 @@
   <div class="frame"></div>
 
   <div class="inner">
-    <div class="venue">BRIBÓN</div>
-    <div class="venue-sub">del puerto</div>
+    <div class="brand"><img src="assets/dor.png" alt="DOR"></div>
+
+    <div class="portrait"></div>
 
     <div class="kicker">
       <div class="rule"></div>
@@ -117,15 +115,14 @@
     </div>
 
     <div class="head">
-      <div class="l">REZERVĂ-ȚI</div>
-      <div class="l">MASA</div>
-      <div class="head-sub">MESE ȘI ZONE VIP · BILETE INCLUSE · SERVICIU LA MASĂ</div>
+      <div class="l">TABLE</div>
+      <div class="l">EXPERIENCE</div>
     </div>
 
     <div class="cards">
       <div class="card hot">
         <div class="tag">ULTIMELE MESE</div>
-        <div class="row"><div class="name">MASĂ CU CANAPEA</div><div class="price">500€</div></div>
+        <div class="row"><div class="name">SOFA TABLE</div><div class="price">500€</div></div>
         <div class="specs">MAX. 6 PERSOANE · 2 STICLE · 6 BILETE INCLUSE</div>
         <div class="bar">
           <div class="track"><div class="fill" style="width:80%"><i style="width:125%"></i></div></div>
@@ -134,7 +131,7 @@
       </div>
 
       <div class="card">
-        <div class="row"><div class="name">MASĂ ÎN PICIOARE</div><div class="price">250€</div></div>
+        <div class="row"><div class="name">STANDING TABLE</div><div class="price">250€</div></div>
         <div class="specs">MAX. 4 PERSOANE · 1 STICLĂ · 4 BILETE INCLUSE</div>
         <div class="bar">
           <div class="track"><div class="fill" style="width:60%"><i style="width:166.667%"></i></div></div>
@@ -143,17 +140,20 @@
       </div>
     </div>
 
-    <div class="note">REZERVĂRI ONLINE — LINK ÎN BIO · LOCURI LIMITATE</div>
-
-    <div class="foot">
+    <div class="info">
       <div class="when">VINERI 9 OCTOMBRIE · DE LA ORA 23:00</div>
       <div class="where">PENÍNSULA DE CONTRADIQUE, 04720 · AGUADULCE (ALMERÍA)</div>
       <div class="res">INFO ȘI REZERVĂRI <b>679 743 114</b></div>
-      <div class="logos">
-        <img class="dor" src="assets/dor.png">
-        <div class="sep"></div>
-        <img class="hc" src="assets/havana.png">
+      <div class="online">REZERVĂRI ONLINE — LINK ÎN BIO · LOCURI LIMITATE</div>
+    </div>
+
+    <div class="bottom">
+      <div class="bribon">
+        <div class="n">BRIBÓN</div>
+        <div class="s">del puerto</div>
       </div>
+      <div class="sep"></div>
+      <img class="hc" src="assets/havana.png" alt="Havana Club">
     </div>
   </div>
 </div>
