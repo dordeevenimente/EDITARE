@@ -36,7 +36,9 @@ micșoreaz-o la dimensiunea nominală (Lanczos) înainte de publicare.
 - Logo-ul DOR stă sus, în locul lockup-ului de pe afiș; Bribón del Puerto coboară
   în subsol, alături de Havana Club.
 - Cardurile de masă: hairline crem 20% opacitate; cardul SOFA TABLE e evidențiat
-  (bordură portocalie + etichetă „ULTIMELE MESE").
+  cu bordură portocalie, fiind cel mai aproape de epuizare.
+- Disponibilitatea se comunică prin numărul de mese rămase („ULTIMELE 2 MESE",
+  „ULTIMELE 6 MESE"), nu prin procent.
 - Banda de ocupare folosește o scară de căldură comună celor două carduri:
   auriu `#E9C65C` → chihlimbar `#E4A33F` → portocaliu `#DC6F30` → roșu `#D13B2B`,
   întinsă pe lățimea totală a pistei. Umplerea decupează gradientul la procentul
@@ -58,4 +60,8 @@ micșoreaz-o la dimensiunea nominală (Lanczos) înainte de publicare.
 - `<i>` → inversul aceluiași procent, ca gradientul să rămână aliniat între
   carduri: `width: 100/procent * 100%` (80% → `125%`, 60% → `166.667%`,
   50% → `200%`, 100% → `100%`).
-- Textul din `.pct` și, dacă e cazul, eticheta `.tag`.
+- `.pct` → numărul de mese rămase („ULTIMELE 2 MESE").
+
+Procentul benzii și numărul de mese sunt valori separate: banda arată cât s-a
+rezervat, textul arată cât a mai rămas. Când se schimbă stocul, actualizează-le
+pe amândouă.
