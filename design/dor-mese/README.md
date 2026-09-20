@@ -29,14 +29,17 @@ micșoreaz-o la dimensiunea nominală (Lanczos) înainte de publicare.
 
 ## Sistem vizual
 
-- Crem `#F4EADC` pe fundal sepia închis, ca pe afiș.
+- Ierarhia repetă afișul: logo DOR sus, portretul, apoi lockup-ul „Bogdan / DLP"
+  cu „LIVE CU FORMATIA" la stânga — acesta este elementul dominant, nu mesele.
+  „TABLE EXPERIENCE" e doar titlul secțiunii de dedesubt.
+- Crem `#F4EADC` pe fundal sepia închis, ca pe afiș; numele artistului în alb pur,
+  ca pe afiș.
 - Titraj Inter Display ExtraBold, tracking `-0.055em` (litere strânse, ca „Bogdan DLP").
 - Etichete și date: majuscule, tracking larg (`0.12em`–`0.30em`).
-- Chenar subțire interior, cu 44px margine — ramă discretă comună celor două formate.
 - Logo-ul DOR stă sus, în locul lockup-ului de pe afiș; Bribón del Puerto coboară
   în subsol, alături de Havana Club.
-- Cardurile de masă: hairline crem 20% opacitate; cardul SOFA TABLE e evidențiat
-  cu bordură portocalie, fiind cel mai aproape de epuizare.
+- Mesele sunt rânduri separate de o linie subțire, fără casete — ca să nu încarce
+  imaginea sub titraj.
 - Disponibilitatea se comunică prin numărul de mese rămase („ULTIMELE 2 MESE",
   „ULTIMELE 6 MESE"), nu prin procent.
 - Banda de ocupare folosește o scară de căldură comună celor două carduri:
