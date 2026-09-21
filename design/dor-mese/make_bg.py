@@ -1,42 +1,41 @@
+"""Construieste fundalurile graficii din afisul principal.
+
+Foloseste doar fundalul difuz din dreapta artistului (x 700-1070, y 180-770) —
+o zona fara persoana si fara textul imprimat pe afis — pe care o intinde peste
+toata panza, o blureaza si o stinge spre negru cald.
+
+    python3 make_bg.py /cale/catre/afis.webp
+"""
 from PIL import Image, ImageFilter
 import numpy as np
-
 import sys
-# afișul principal, la rezoluția originală 1080x1440
+
 P = Image.open(sys.argv[1] if len(sys.argv) > 1 else 'afis.webp').convert('RGB')
-STRIP_TOP, STRIP_BOT = 170, 770
+BACKDROP = (700, 180, 1070, 770)          # fundal difuz, fara artist
 
-def build(W, H, scale, head_y, fade_start, fade_end, top_dark=0.34):
-    strip = P.crop((0, STRIP_TOP, 1080, STRIP_BOT))
-    sw = int(1080*scale); sh = int(strip.height*scale)
-    strip = strip.resize((sw, sh), Image.LANCZOS)
-    canvas = Image.new('RGB', (W, H), (16, 11, 7))
-    x0 = (W - sw)//2
-    canvas.paste(strip, (x0, head_y))
-    if x0 > 0:
-        canvas.paste(strip.crop((0,0,28,sh)).resize((x0, sh), Image.BICUBIC), (0, head_y))
-        canvas.paste(strip.crop((sw-28,0,sw,sh)).resize((W-x0-sw, sh), Image.BICUBIC), (x0+sw, head_y))
-    full = canvas.crop((0, head_y, W, head_y+sh))
-    if head_y > 0:
-        canvas.paste(full.crop((0,0,W,2)).resize((W, head_y), Image.BICUBIC), (0,0))
-    tail_h = max(H-head_y-sh, 1)
-    tail = np.asarray(full.crop((0,sh-3,W,sh)).resize((W, tail_h), Image.BICUBIC)).astype(float)
-    tail *= np.linspace(1.0, 0.0, tail_h)[:,None,None] ** 0.8
-    canvas.paste(Image.fromarray(tail.astype(np.uint8)), (0, head_y+sh))
+def build(W, H, glow_y, fade_start, fade_end, top_dark=0.0):
+    src = P.crop(BACKDROP).resize((W, H), Image.LANCZOS)
+    a = np.asarray(src.filter(ImageFilter.GaussianBlur(int(46 * W / 1080)))).astype(float)
 
-    a = np.asarray(canvas.filter(ImageFilter.GaussianBlur(4))).astype(float)
-    yy = np.linspace(0, H, H)[:,None]; xx = np.linspace(0, 1, W)[None,:]
-    t = np.clip((yy-fade_start)/(fade_end-fade_start), 0, 1)
-    keep = (1 - 0.95*(t**1.25)) * (1 - top_dark*np.exp(-(yy**2)/(2*140.0**2)))
-    vig = np.clip(1 - 0.44*(((xx-0.5)*2)**2) - 0.10*(((yy/H-0.30)*2)**2), 0.28, 1)
-    a = a * (keep*vig)[...,None] * 0.92
-    a = a * np.array([1.06,0.98,0.90]) + np.array([11,7,5])
-    a = np.clip(a,0,255)
-    rng = np.random.default_rng(5)
-    a = np.clip(a + rng.normal(0,4.0,a.shape),0,255).astype(np.uint8)
+    yy = np.linspace(0, H, H)[:, None]
+    xx = np.linspace(0, 1, W)[None, :]
+    # halou cald in treimea de sus, acolo unde sta logo-ul si numele
+    glow = 0.52 + 1.30 * np.exp(-(((yy - glow_y) ** 2) / (2 * (H * 0.17) ** 2)
+                                  + ((xx - 0.5) ** 2) / 0.24))
+    t = np.clip((yy - fade_start) / (fade_end - fade_start), 0, 1)
+    fade = 1 - 0.80 * (t ** 1.2)
+    fade = fade * (1 - top_dark * np.exp(-(yy ** 2) / (2 * 140.0 ** 2)))
+    vig = np.clip(1 - 0.46 * (((xx - 0.5) * 2) ** 2)
+                    - 0.16 * (((yy / H - 0.30) * 2) ** 2), 0.26, 1)
+
+    a = a * (glow * fade * vig)[..., None] * 0.92
+    a = a * np.array([1.08, 0.97, 0.85]) + np.array([14, 9, 6])
+    a = np.clip(a, 0, 255)
+    rng = np.random.default_rng(11)
+    a = np.clip(a + rng.normal(0, 4.2, a.shape), 0, 255).astype(np.uint8)
     return Image.fromarray(a)
 
 if __name__ == '__main__':
-    build(1080, 1440, 0.52,  92, 300,  720).save('assets/bg.png')
-    build(1080, 1920, 0.62, 321, 566, 1060, top_dark=0.0).save('assets/bg_story.png')
+    build(1080, 1440, 300, 430,  980).save('assets/bg.png')
+    build(1080, 1920, 520, 700, 1330, top_dark=0.34).save('assets/bg_story.png')
     print('assets/bg.png + assets/bg_story.png regenerate')

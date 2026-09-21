@@ -9,7 +9,7 @@ Grafică secundară pentru mese, derivată din afișul principal
 |---|---|
 | `mese.html` | Sursa graficii de feed — 1080×1440 (3:4, același raport ca afișul). |
 | `mese_story.html` | Sursa graficii de story — 1080×1920, cu zone sigure de 210px sus/jos. |
-| `assets/bg.png`, `assets/bg_story.png` | Fundalul din afiș: fâșia curată a fotografiei (y 170–770, deasupra textului imprimat), scalată, cu marginile prelungite până la 1080px și stinsă treptat spre negru cald. Se regenerează cu `make_bg.py`. |
+| `assets/bg.png`, `assets/bg_story.png` | Fundalul din afiș: doar zona difuză din dreapta artistului (x 700–1070, y 180–770), fără persoană și fără textul imprimat, blurată și stinsă spre negru cald. Se regenerează cu `make_bg.py`. |
 | `make_bg.py` | Scriptul care construiește cele două fundaluri din afișul original. |
 | `assets/dor.png`, `assets/havana.png` | Logo-uri extrase pe transparență (luminanță → alpha, fill crem `#F4EADC`). |
 | `fonts/` | Inter Display (OFL) — grotesc apropiat de titrajul afișului. |
@@ -29,9 +29,11 @@ micșoreaz-o la dimensiunea nominală (Lanczos) înainte de publicare.
 
 ## Sistem vizual
 
-- Ierarhia repetă afișul: logo DOR sus, portretul, apoi lockup-ul „Bogdan / DLP"
-  cu „LIVE CU FORMATIA" la stânga — acesta este elementul dominant, nu mesele.
-  „TABLE EXPERIENCE" e doar titlul secțiunii de dedesubt.
+- Ierarhia: logo DOR sus, apoi lockup-ul „Bogdan / DLP" cu „LIVE CU FORMATIA"
+  la stânga — acesta este elementul dominant, nu mesele. „TABLE EXPERIENCE"
+  e doar titlul secțiunii de dedesubt.
+- Fundalul este abstract, fără fotografia artistului — doar atmosfera caldă
+  a afișului, ca titrajul să rămână singurul punct de atenție.
 - Crem `#F4EADC` pe fundal sepia închis, ca pe afiș; numele artistului în alb pur,
   ca pe afiș.
 - Titraj Inter Display ExtraBold, tracking `-0.055em` (litere strânse, ca „Bogdan DLP").
@@ -42,9 +44,8 @@ micșoreaz-o la dimensiunea nominală (Lanczos) înainte de publicare.
   imaginea sub titraj.
 - Trei niveluri, în ordinea descrescătoare a prețului: PREMIUM SOFA 1500€,
   SOFA TABLE 500€, STANDING TABLE 250€.
-- Disponibilitatea se comunică prin numărul de mese rămase („ULTIMELE 2 MESE",
-  „ULTIMELE 6 MESE"), nu prin procent. PREMIUM SOFA nu are încă bandă de
-  ocupare — se adaugă când se știe câte mese premium sunt disponibile.
+- Disponibilitatea se comunică prin numărul de mese rămase („ULTIMA MASĂ",
+  „ULTIMELE 2 MESE", „ULTIMELE 6 MESE"), nu prin procent.
 - Banda de ocupare folosește o scară de căldură comună celor două carduri:
   auriu `#E9C65C` → chihlimbar `#E4A33F` → portocaliu `#DC6F30` → roșu `#D13B2B`,
   întinsă pe lățimea totală a pistei. Umplerea decupează gradientul la procentul
@@ -68,8 +69,6 @@ micșoreaz-o la dimensiunea nominală (Lanczos) înainte de publicare.
   50% → `200%`, 100% → `100%`).
 - `.pct` → numărul de mese rămase („ULTIMELE 2 MESE").
 
-Ca să primească și PREMIUM SOFA o bandă, scoate clasa `premium` de pe rând și
-adaugă-i același bloc `.bar` ca al celorlalte.
 
 Procentul benzii și numărul de mese sunt valori separate: banda arată cât s-a
 rezervat, textul arată cât a mai rămas. Când se schimbă stocul, actualizează-le
