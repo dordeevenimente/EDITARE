@@ -37,24 +37,24 @@
   .brand img{height:100%;display:block;filter:drop-shadow(0 6px 26px rgba(0,0,0,.6))}
 
   /* spatiul in care se vede artistul, ca pe afis */
-  .portrait{height:300px;flex:none}
+  .portrait{height:230px;flex:none}
 
   /* ---------- numele artistului, ca pe afis ---------- */
   .artist{width:100%;color:var(--white)}
-  .artist .a1{font-weight:800;font-size:225px;letter-spacing:-.052em;line-height:.80;text-align:center;
+  .artist .a1{font-weight:800;font-size:205px;letter-spacing:-.052em;line-height:.80;text-align:center;
     text-shadow:0 10px 60px rgba(0,0,0,.45)}
   .artist .a2{margin-top:2px;display:flex;align-items:flex-end;justify-content:center;gap:26px}
   .artist .live{font-weight:700;font-size:26px;letter-spacing:.055em;padding-bottom:26px;white-space:nowrap}
-  .artist .dlp{font-weight:800;font-size:152px;letter-spacing:-.045em;line-height:.86;
+  .artist .dlp{font-weight:800;font-size:138px;letter-spacing:-.045em;line-height:.86;
     text-shadow:0 10px 60px rgba(0,0,0,.45)}
 
   /* ---------- sectiunea de mese ---------- */
-  .section{margin-top:40px;display:flex;align-items:center;gap:22px;width:100%}
+  .section{margin-top:32px;display:flex;align-items:center;gap:22px;width:100%}
   .section .rule{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
   .section span{font-weight:700;font-size:22px;letter-spacing:.34em;text-indent:.34em;white-space:nowrap}
 
   .tables{margin-top:6px;width:100%}
-  .t{padding:26px 8px 22px;border-bottom:1px solid var(--line)}
+  .t{padding:22px 8px 20px;border-bottom:1px solid var(--line)}
   .row{display:flex;align-items:baseline;justify-content:space-between;gap:24px}
   .name{font-weight:700;font-size:46px;letter-spacing:-.025em;line-height:1;white-space:nowrap}
   .price{font-weight:800;font-size:50px;letter-spacing:-.035em;line-height:1}
@@ -66,6 +66,7 @@
   .fill{position:absolute;left:0;top:0;bottom:0;overflow:hidden}
   .fill i{position:absolute;left:0;top:0;bottom:0;background:var(--heat);display:block}
   .pct{font-weight:700;font-size:17px;letter-spacing:.14em;text-indent:.14em;white-space:nowrap}
+  .t.premium{padding-bottom:24px}
   .t.hot .fill{box-shadow:0 0 22px rgba(220,111,48,.5)}
   .t.hot .pct{color:var(--hot)}
   .t:not(.hot) .pct{color:var(--warm)}
@@ -111,6 +112,11 @@
     </div>
 
     <div class="tables">
+      <div class="t premium">
+        <div class="row"><div class="name">PREMIUM SOFA</div><div class="price">1500€</div></div>
+        <div class="specs">MAX. 15 PERSOANE · 6 STICLE · 15 BILETE INCLUSE</div>
+      </div>
+
       <div class="t hot">
         <div class="row"><div class="name">SOFA TABLE</div><div class="price">500€</div></div>
         <div class="specs">MAX. 6 PERSOANE · 2 STICLE · 6 BILETE INCLUSE</div>

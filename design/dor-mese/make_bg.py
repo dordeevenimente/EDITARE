@@ -37,6 +37,6 @@ def build(W, H, scale, head_y, fade_start, fade_end, top_dark=0.34):
     return Image.fromarray(a)
 
 if __name__ == '__main__':
-    build(1080, 1440, 0.68,  88, 372,  800).save('assets/bg.png')
-    build(1080, 1920, 0.78, 308, 640, 1140, top_dark=0.0).save('assets/bg_story.png')
+    build(1080, 1440, 0.52,  92, 300,  720).save('assets/bg.png')
+    build(1080, 1920, 0.62, 321, 566, 1060, top_dark=0.0).save('assets/bg_story.png')
     print('assets/bg.png + assets/bg_story.png regenerate')

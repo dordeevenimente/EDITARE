@@ -40,8 +40,11 @@ micșoreaz-o la dimensiunea nominală (Lanczos) înainte de publicare.
   în subsol, alături de Havana Club.
 - Mesele sunt rânduri separate de o linie subțire, fără casete — ca să nu încarce
   imaginea sub titraj.
+- Trei niveluri, în ordinea descrescătoare a prețului: PREMIUM SOFA 1500€,
+  SOFA TABLE 500€, STANDING TABLE 250€.
 - Disponibilitatea se comunică prin numărul de mese rămase („ULTIMELE 2 MESE",
-  „ULTIMELE 6 MESE"), nu prin procent.
+  „ULTIMELE 6 MESE"), nu prin procent. PREMIUM SOFA nu are încă bandă de
+  ocupare — se adaugă când se știe câte mese premium sunt disponibile.
 - Banda de ocupare folosește o scară de căldură comună celor două carduri:
   auriu `#E9C65C` → chihlimbar `#E4A33F` → portocaliu `#DC6F30` → roșu `#D13B2B`,
   întinsă pe lățimea totală a pistei. Umplerea decupează gradientul la procentul
@@ -64,6 +67,9 @@ micșoreaz-o la dimensiunea nominală (Lanczos) înainte de publicare.
   carduri: `width: 100/procent * 100%` (80% → `125%`, 60% → `166.667%`,
   50% → `200%`, 100% → `100%`).
 - `.pct` → numărul de mese rămase („ULTIMELE 2 MESE").
+
+Ca să primească și PREMIUM SOFA o bandă, scoate clasa `premium` de pe rând și
+adaugă-i același bloc `.bar` ca al celorlalte.
 
 Procentul benzii și numărul de mese sunt valori separate: banda arată cât s-a
 rezervat, textul arată cât a mai rămas. Când se schimbă stocul, actualizează-le
